@@ -2,10 +2,10 @@ package pl.javastart.task;
 
 import java.util.Comparator;
 
-public class ComparatorLastName implements Comparator<Player> {
+public class ComparatorResult implements Comparator<Player> {
 
     @Override
     public int compare(Player player1, Player player2) {
-        return player1.getLastName().compareTo(player2.getLastName());
+        return Integer.compare(player1.getResult(), player2.getResult());
     }
 }

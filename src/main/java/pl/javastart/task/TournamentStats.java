@@ -9,6 +9,8 @@ public class TournamentStats {
 
     public static final int SORT_BY_NAME = 1;
     public static final int SORT_BY_SURNAME = 2;
+    public static final int SORT_BY_RESULT = 3;
+    public static final int SORT_DESCENDING = 2;
 
     void run(Scanner scanner) {
         List<Player> playerList = readPlayers(scanner);
@@ -24,14 +26,12 @@ public class TournamentStats {
 
     private static int readSortingOrder(Scanner scanner) {
         System.out.println("Sortować rosnąco czy malejąco? (1 - rosnąco, 2 - malejąco)");
-        int sortingOrder = scanner.nextInt();
-        return sortingOrder;
+        return scanner.nextInt();
     }
 
     private static int readSortingParameter(Scanner scanner) {
         System.out.println("Po jakim parametrze posortować? (1 - imię, 2- nazwisko, 3- wynik)");
-        int sortingParameter = scanner.nextInt();
-        return sortingParameter;
+        return scanner.nextInt();
     }
 
     private static List<Player> readPlayers(Scanner scanner) {
@@ -64,9 +64,10 @@ public class TournamentStats {
         Comparator<Player> comparator = switch (sortingParameter) {
             case SORT_BY_NAME -> new ComparatorFirstName();
             case SORT_BY_SURNAME -> new ComparatorLastName();
+            case SORT_BY_RESULT -> new ComparatorResult();
             default -> new ComparatorFirstName();
         };
-        if (sortingOrder == 2) {
+        if (sortingOrder == SORT_DESCENDING) {
             comparator = comparator.reversed();
         }
         playerList.sort(comparator);
